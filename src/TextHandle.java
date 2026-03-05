@@ -97,11 +97,11 @@ public class TextHandle implements interfaceCallbackText {
     }
 
     public int getPosOfHit(int nr) {
-        if (nr < searchResult.size())
-            nr = searchResult.getFirst();
-        if (nr > searchResult.size())
-            nr = searchResult.getLast();
-        return nr;
+        if (nr < 0)
+            return searchResult.getFirst();
+        else if (nr > searchResult.size())
+            return searchResult.getLast();
+        return searchResult.get(nr);
     }
 
     public boolean getHitAvailable() {
@@ -151,8 +151,7 @@ public class TextHandle implements interfaceCallbackText {
         selectedEnd = tmpSelction[1];
         if (!(getPosOfHit(selectedResult) == selectedStart &&
                 getPosOfHit(selectedResult) == selectedEnd - searchedText.length())) {
-            selectedStart = getPosOfHit(selectedResult);
-            selectedEnd = getPosOfHit(selectedResult) + searchedText.length();
+            setNextHit(searchedText, cbUI);
             return false;
         } else {
             return true;
