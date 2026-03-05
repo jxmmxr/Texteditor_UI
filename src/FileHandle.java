@@ -175,7 +175,7 @@ public class FileHandle {
             if (i > 0 && i < s.length() - 1)
                 ext = s.substring(i + 1).toLowerCase();
 
-            return filetype.equals(ext);
+            return filetype.equals(ext) || !s.matches(".*\\..*");
         }
 
         @Override
