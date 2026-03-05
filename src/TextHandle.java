@@ -144,8 +144,11 @@ public class TextHandle implements interfaceCallbackText {
         cbUI.markText(selectedStart, selectedEnd);
     }
 
-    private boolean replaceTextSet(String searchedText) {
+    private boolean replaceTextSet(String searchedText, interfaceCallbackUI cbUI) {
         // check if replace position is selected one
+        int[] tmpSelction = cbUI.getMarkedTextPos();
+        selectedStart = tmpSelction[0];
+        selectedEnd = tmpSelction[1];
         if (!(getPosOfHit(selectedResult) == selectedStart &&
                 getPosOfHit(selectedResult) == selectedEnd - searchedText.length())) {
             selectedStart = getPosOfHit(selectedResult);
@@ -162,7 +165,7 @@ public class TextHandle implements interfaceCallbackText {
             searchText(searchedText, cbUI);
         if (!getHitAvailable() | !this.searchedText.equals(searchedText))
             searchText(searchedText, cbUI);
-        if (replaceTextSet(searchedText)) {
+        if (replaceTextSet(searchedText, cbUI)) {
             //replacing text & save for undo
             String tmpTextBefore = currText;
             String tmpText =

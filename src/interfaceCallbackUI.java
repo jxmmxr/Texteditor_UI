@@ -1,6 +1,8 @@
 public interface interfaceCallbackUI {
     public abstract void markText(int selectedStart, int selectedEnd);
 
+    public abstract int[] getMarkedTextPos();
+
     public abstract void setCurrentText();
 
     public abstract void setSearchHits(int currHit, int numHits);

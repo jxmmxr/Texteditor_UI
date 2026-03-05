@@ -368,6 +368,11 @@ public class GUI extends JFrame implements interfaceCallbackUI {
     }
 
     @Override
+    public int[] getMarkedTextPos(){
+        return new int[]{textAreaTextEditor.getSelectionStart(), textAreaTextEditor.getSelectionEnd()};
+    }
+
+    @Override
     public void setCurrentText(){
         textAreaTextEditor.setText(textHandle.getCurrTextString());
     }
