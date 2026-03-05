@@ -38,8 +38,10 @@ public class TextHandle implements interfaceCallbackText {
     }
 
     public void searchText(String searchedText, interfaceCallbackUI cbUI) {
-        if (searchedText == null)
+        if (searchedText == null) {
+            cbUI.setSearchHits(0, 0);
             return;
+        }
         // init helpers
         int lengthSearchedText = searchedText.length();
         int lengthText = currText.length();
@@ -47,8 +49,10 @@ public class TextHandle implements interfaceCallbackText {
         int checkIndex = lengthSearchedText;
         boolean tagMatch;
         searchResult.clear();
-        if (lengthText < lengthSearchedText)
+        if (lengthText < lengthSearchedText) {
+            cbUI.setSearchHits(0, 0);
             return;
+        }
         // start boyer & moore search
         while (index - 1 < lengthText - lengthSearchedText) {
             tagMatch = false;
