@@ -1,4 +1,4 @@
 
 void main() {
-
+    new GUI();
 }
