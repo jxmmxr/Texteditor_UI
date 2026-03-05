@@ -185,7 +185,7 @@ public class FileHandle {
     }
 
     // - dialog windows:
-    // 0: Open                          2: Cancel
+    // 0: New       1: No
     private int dialogNew(){
         JFileChooser fc = new JFileChooser();
         JOptionPane optionPane = new JOptionPane();
@@ -194,6 +194,10 @@ public class FileHandle {
         optionPane.setMessage("Do you want to create a new file?");
         JDialog dialog = optionPane.createDialog(fc, "New file?");
         dialog.show();
+        if (optionPane.getValue() == null)
+            return 1;
+        if (optionPane.getValue().toString().equals("-1"))
+            return 1;
         return Integer.parseInt(optionPane.getValue().toString());
     }
 
@@ -241,7 +245,11 @@ public class FileHandle {
                 optionPane.setMessage("File already exists, do you want to overwrite it?");
                 JDialog dialog = optionPane.createDialog(fc, "file conflict!");
                 dialog.show();
-                returnVal = Integer.parseInt(optionPane.getValue().toString());
+                if (optionPane.getValue() == null) {
+                    returnVal = 2;
+                } else {
+                    returnVal = Integer.parseInt(optionPane.getValue().toString());
+                }
                 if (!(returnVal == JOptionPane.YES_OPTION))
                     returnVal = 1;
             }
@@ -260,6 +268,8 @@ public class FileHandle {
         optionPane.setMessage("File content changed.\ndo you want to save changes?");
         JDialog dialog = optionPane.createDialog(fc, "Save changes?");
         dialog.show();
+        if (optionPane.getValue() == null)
+            return 2;
         return Integer.parseInt(optionPane.getValue().toString());
     }
 }
